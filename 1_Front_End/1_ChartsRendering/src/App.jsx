@@ -3,6 +3,7 @@ import ChartSelector from './components/ChartSelector'
 import './App.css'
 import { Chart } from 'react-google-charts'
 import PieChart from './components/PieChart'
+import BarChart from './components/BarChart'
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
   return (
     <>
       <ChartSelector selector={selector} setSelector={setSelector}></ChartSelector>
-      <PieChart></PieChart>
+      {/* <PieChart></PieChart> */}
+      <BarChart></BarChart>
       {/* <MyChart></MyChart> */}
     </>
   )

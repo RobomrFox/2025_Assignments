@@ -24,6 +24,7 @@ export default function PieChart({ chart, setChart }) {
                         newSectorData.push({
                             id: newSectorData.length + 1,
                             label: '',
+                            value: 0
                         })
                     }
 
