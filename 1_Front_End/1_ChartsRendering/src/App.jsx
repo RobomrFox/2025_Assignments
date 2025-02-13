@@ -16,9 +16,9 @@ function App() {
   return (
     <>
       <ChartSelector selector={selector} setSelector={setSelector}></ChartSelector>
-      {/* <PieChart></PieChart> */}
+      <PieChart></PieChart>
       <BarChart></BarChart>
-      {/* <MyChart></MyChart> */}
+      <MyChart></MyChart>
     </>
   )
 }
