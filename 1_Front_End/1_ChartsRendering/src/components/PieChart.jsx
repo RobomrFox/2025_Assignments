@@ -1,4 +1,13 @@
-import { useState, memo } from "react"
+import { useState, memo, useEffect } from "react"
+import { MyChart } from "../App";
+
+
+function transformDataForChart(formData) {
+    return [
+        [formData.title || 'Categories', 'Values'],
+        ...formData.sectorData.map(sector => [sector.label || sector.id, sector.value])
+    ];
+}
 
 export default function PieChart({ chart, setChart }) {
     const [formData, setFormData] = useState({
@@ -50,6 +59,12 @@ export default function PieChart({ chart, setChart }) {
             <div id="sectorCollection" className="flex flex-wrap gap-10 max-w-3/7 border bg-red-100">
                 <RenderSector items = {formData.sectorData} formData = {formData} setFormData= {setFormData} />
             </div>
+
+            <MyChart chartType='PieChart'
+            data={transformDataForChart(formData)}
+            options={{title: formData.title}} 
+            />
+            
         </div>
     )
 }
@@ -58,9 +73,16 @@ export default function PieChart({ chart, setChart }) {
 
 
 const RenderSector = memo(function ({items, formData, setFormData}) {
+
+    useEffect(() => {
+        const newSectorData = [...formData.sectorData];
+        newSectorData[items.length - 1].value = getLastSectorValue();
+        setFormData({...formData, sectorData: newSectorData});
+    }, [formData.totalValue]);
+
     let sumOfValues = () => {
         let sum = 0
-        for (let i = 0; i < formData.sectorData.length-1; i++) {
+        for (let i = 0; i < formData.sectorData.length - 1; i++) {
             sum = sum + formData.sectorData[i].value;
         }
         return sum;

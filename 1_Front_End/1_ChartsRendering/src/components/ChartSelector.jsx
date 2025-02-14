@@ -1,4 +1,4 @@
-import PieChart from "./PieChart";
+
 
 
 export default function ChartSelector({selector, setSelector}) {
