@@ -1,4 +1,12 @@
-import { useState, memo } from "react"
+import { useState, memo } from "react";
+import { MyChart } from "../App";
+
+function transformDataForChart(formData) {
+    return [
+        ["Category", formData.yAxisLabel || "Value"],
+        ...formData.barData.map(bar => [bar.label || `Bar ${bar.id}`, bar.value])
+    ];
+}
 
 export default function BarChart({ chart, setChart }) {
     const [formData, setFormData] = useState({
@@ -70,7 +78,19 @@ export default function BarChart({ chart, setChart }) {
             <div id="barCollection" className="flex flex-wrap gap-10 max-w-3/7 border bg-red-100">
                 <RenderBars items={formData.barData} formData={formData} setFormData={setFormData} />
             </div>
+
+            <MyChart 
+            chartType="BarChart"
+            data={transformDataForChart(formData)}
+            options={{
+                title: formData.title,
+                hAxis: { title: "Categories" },
+                vAxis: { title: formData.yAxisLabel, gridlines: { count: formData.gridInterval } }
+            }}
+             />
         </div>
+
+        
     )
 }
 

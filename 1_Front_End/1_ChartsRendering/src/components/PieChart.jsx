@@ -92,9 +92,9 @@ const RenderSector = memo(function ({items, formData, setFormData}) {
                     <div className="flex gap-4 justify-around pb-2">
                         <label htmlFor={`value${index}`}>Value</label>
                         {index === items.length - 1 ? (
-                            <span className="border w-25 rounded-sm px-2 py-1">
-                                {getLastSectorValue()}
-                            </span>
+                            <input className="border w-25 rounded-sm" value={getLastSectorValue()}>
+                                
+                            </input>
                         ) : (
                             <input
                                 className="border w-25 rounded-sm"
