@@ -1,0 +1,46 @@
+@model List<ContactManagerApp.Models.Trip>
+
+<h2>My Trip Log</h2>
+<a asp-controller="Trip" asp-action="AddStep1" class="btn btn-primary">Add Trip</a>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Destination</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Accommodations</th>
+        <th>Things To Do</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var trip in Model)
+    {
+        <tr>
+            <td>@trip.Destination</td>
+            <td>@trip.StartDate.ToShortDateString()</td>
+            <td>@trip.EndDate.ToShortDateString()</td>
+            <td>
+                @if (!string.IsNullOrEmpty(trip.Accommodation))
+                {
+                    <p>@trip.Accommodation</p>
+                    <p>Phone: @trip.AccommodationPhone</p>
+                    <p>Email: @trip.AccommodationEmail</p>
+                }
+            </td>
+            <td>
+                <ul>
+                    @if (!string.IsNullOrEmpty(trip.ThingToDo1)) { <li>@trip.ThingToDo1</li> }
+                    @if (!string.IsNullOrEmpty(trip.ThingToDo2)) { <li>@trip.ThingToDo2</li> }
+                    @if (!string.IsNullOrEmpty(trip.ThingToDo3)) { <li>@trip.ThingToDo3</li> }
+                </ul>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
