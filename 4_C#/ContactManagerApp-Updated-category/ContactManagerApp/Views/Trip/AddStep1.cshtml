@@ -1,10 +1,10 @@
 @model ContactManagerApp.Models.Trip
 
 <h2>Add Trip Destination and Dates</h2>
-<form asp-action="AddStep1" method="post">
+<form asp-controller="Trip" asp-action="AddStep1" method="post" id="addTripForm">
     <div class="form-group">
         <label asp-for="Destination"></label>
-        <input asp-for="Destination" class="form-control" />
+        <input asp-for="Destination" class="form-control" required />
         <span asp-validation-for="Destination" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -13,14 +13,27 @@
     </div>
     <div class="form-group">
         <label asp-for="StartDate"></label>
-        <input asp-for="StartDate" type="date" class="form-control" />
+        <input asp-for="StartDate" type="date" class="form-control" required />
         <span asp-validation-for="StartDate" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="EndDate"></label>
-        <input asp-for="EndDate" type="date" class="form-control" />
+        <input asp-for="EndDate" type="date" class="form-control" required />
         <span asp-validation-for="EndDate" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Next</button>
+    <button type="submit" class="btn btn-primary" id="nextButton">Next</button>
     <a asp-action="Cancel" class="btn btn-secondary">Cancel</a>
 </form>
+
+@section Scripts {
+    <script>
+        document.getElementById('addTripForm').addEventListener('submit', function(e) {
+            console.log('Form submission triggered');
+            // Optional: You can add additional validation here
+        });
+
+        document.getElementById('nextButton').addEventListener('click', function(e) {
+            console.log('Next button clicked');
+        });
+    </script>
+}

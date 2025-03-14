@@ -2,12 +2,14 @@ using ContactManagerApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession(); // Add session middleware
 
-// Add MongoDB dependency injection
-builder.Services.AddSingleton<MongoDbContext>(sp =>
+// MongoDB setup
+builder.Services.AddSingleton<MongoDbContext>(sp => 
 {
+    
     var connectionString = builder.Configuration.GetConnectionString("MongoDb");
     var databaseName = builder.Configuration["MongoDb:DatabaseName"];
     return new MongoDbContext(connectionString, databaseName);
@@ -15,17 +17,13 @@ builder.Services.AddSingleton<MongoDbContext>(sp =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-}
+// Enable session middleware
+app.UseSession();
+
+// Existing pipeline setup
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Trip}/{action=Index}/{id?}");

@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace ContactManagerApp.Models
 {
@@ -7,15 +8,18 @@ namespace ContactManagerApp.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; } // Make nullable with ?
 
         [BsonElement("Destination")]
+        [Required(ErrorMessage = "Destination is required")]
         public string Destination { get; set; }
 
         [BsonElement("StartDate")]
+        [Required(ErrorMessage = "Start date is required")]
         public DateTime StartDate { get; set; }
 
         [BsonElement("EndDate")]
+        [Required(ErrorMessage = "End date is required")]
         public DateTime EndDate { get; set; }
 
         public string? Accommodation { get; set; }

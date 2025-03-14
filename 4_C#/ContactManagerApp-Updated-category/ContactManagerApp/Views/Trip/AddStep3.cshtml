@@ -2,6 +2,14 @@
 
 <h2>@ViewData["Subhead"]</h2>
 <form asp-action="AddStep3" method="post">
+    <!-- Hidden fields to preserve data -->
+    <input type="hidden" asp-for="Destination" />
+    <input type="hidden" asp-for="StartDate" />
+    <input type="hidden" asp-for="EndDate" />
+    <input type="hidden" asp-for="Accommodation" />
+    <input type="hidden" asp-for="AccommodationPhone" />
+    <input type="hidden" asp-for="AccommodationEmail" />
+    
     <div class="form-group">
         <label asp-for="ThingToDo1"></label>
         <input asp-for="ThingToDo1" class="form-control" />
